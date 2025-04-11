@@ -49,8 +49,14 @@ public class CalculatorTest {
     }
 
     @Test
-    void sumOfNumberContainingSingleNegativeNumber() throws InvalidNumberException {
+    void sumOfNumberContainingSingleNegativeNumber() {
         InvalidNumberException exception = assertThrows(InvalidNumberException.class, () -> Calculator.add("1,-2,5"));
         assertEquals("negative numbers not allowed -2", exception.getMessage());
+    }
+
+    @Test
+    void sumOfNumberContainingMultipleNegativeNumbers() {
+        InvalidNumberException exception = assertThrows(InvalidNumberException.class, () -> Calculator.add("1,-2,-5"));
+        assertEquals("negative numbers not allowed -2,-5", exception.getMessage());
     }
 }

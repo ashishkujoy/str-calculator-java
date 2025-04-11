@@ -1,8 +1,7 @@
 package org.learning;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Calculator {
     private static Collection<Integer> parseNumbers(String numberStr) {
@@ -15,10 +14,12 @@ public class Calculator {
     }
 
     private static void validateArguments(Collection<Integer> numbers) throws InvalidNumberException {
-        Optional<Integer> negativeNumber = numbers.stream().filter(number -> number < 0).findFirst();
+        List<Integer> negativeNumbers = numbers.stream()
+                .filter(number -> number < 0)
+                .toList();
 
-        if (negativeNumber.isPresent()) {
-            throw new InvalidNumberException(negativeNumber.get());
+        if (!negativeNumbers.isEmpty()) {
+            throw InvalidNumberException.getInstance(negativeNumbers);
         }
     }
 
