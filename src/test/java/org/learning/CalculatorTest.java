@@ -22,4 +22,10 @@ public class CalculatorTest {
         int sum = Calculator.add("1,2");
         assertEquals(3, sum);
     }
+
+    @Test
+    void sumOfMultipleCommaSeparatedNumbers() {
+        int sum = Calculator.add("1,2,5");
+        assertEquals(8, sum);
+    }
 }
