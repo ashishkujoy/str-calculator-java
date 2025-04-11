@@ -28,4 +28,16 @@ public class CalculatorTest {
         int sum = Calculator.add("1,2,5");
         assertEquals(8, sum);
     }
+
+    @Test
+    void sumOfCustomDelimitedNumbers() {
+        int sum = Calculator.add("1,2,5");
+        assertEquals(8, sum);
+    }
+
+    @Test
+    void sumOfNumbersContainingNewLine() {
+        int sum = Calculator.add("1\n2,5\n7");
+        assertEquals(15, sum);
+    }
 }

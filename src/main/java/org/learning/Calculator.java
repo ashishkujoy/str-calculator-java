@@ -1,14 +1,17 @@
 package org.learning;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class Calculator {
+    private static Stream<Integer> parseNumbers(String numberStr) {
+        return Arrays.stream(numberStr.split("\n"))
+                .flatMap(line -> Arrays.stream(line.split(",")))
+                .filter(token -> !token.isEmpty())
+                .map(Integer::parseInt);
+    }
     public static int add(String numberStr) {
-        String[] nums = numberStr.split(",");
-
-        return Arrays.stream(nums)
-                .filter(num -> !num.isEmpty())
-                .map(Integer::parseInt)
+        return Calculator.parseNumbers(numberStr)
                 .reduce(0, Integer::sum);
     }
 }
