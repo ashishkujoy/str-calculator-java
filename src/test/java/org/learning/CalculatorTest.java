@@ -40,4 +40,10 @@ public class CalculatorTest {
         int sum = Calculator.add("1\n2,5\n7");
         assertEquals(15, sum);
     }
+
+    @Test
+    void sumOfNumbersContainingWhitespaceCharacters() {
+        int sum = Calculator.add("1  \n2 ,5\n7");
+        assertEquals(15, sum);
+    }
 }
