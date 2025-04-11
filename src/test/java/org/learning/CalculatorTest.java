@@ -16,4 +16,10 @@ public class CalculatorTest {
         int sum = Calculator.add("1");
         assertEquals(1, sum);
     }
+
+    @Test
+    void sumOfTwoCommaSeparatedNumbers() {
+        int sum = Calculator.add("1,2");
+        assertEquals(3, sum);
+    }
 }
