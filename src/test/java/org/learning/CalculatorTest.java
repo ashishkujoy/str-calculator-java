@@ -31,12 +31,6 @@ public class CalculatorTest {
     }
 
     @Test
-    void sumOfCustomDelimitedNumbers() throws InvalidNumberException {
-        int sum = Calculator.add("1,2,5");
-        assertEquals(8, sum);
-    }
-
-    @Test
     void sumOfNumbersContainingNewLine() throws InvalidNumberException {
         int sum = Calculator.add("1\n2,5\n7");
         assertEquals(15, sum);
@@ -58,5 +52,12 @@ public class CalculatorTest {
     void sumOfNumberContainingMultipleNegativeNumbers() {
         InvalidNumberException exception = assertThrows(InvalidNumberException.class, () -> Calculator.add("1,-2,-5"));
         assertEquals("negative numbers not allowed -2,-5", exception.getMessage());
+    }
+
+    @Test
+    void sumOfCustomDelimitedNumbers() throws InvalidNumberException {
+        int sum = Calculator.add("//#\n1#2#3\n4#5");
+
+        assertEquals(15, sum);
     }
 }

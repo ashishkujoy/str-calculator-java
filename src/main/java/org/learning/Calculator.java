@@ -1,12 +1,27 @@
 package org.learning;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calculator {
+    private static final Pattern customDelimitedNumPattern = Pattern.compile("^//(.+)\\n([\\s\\S]+)$");
+
+    public static Pair<String, String> extractDelimiterAndNumStr(String numberStr) {
+        Matcher matcher = customDelimitedNumPattern.matcher(numberStr);
+        if (matcher.matches()) {
+            return new Pair<>(matcher.group(1), matcher.group(2));
+        }
+        return new Pair<>(",", numberStr);
+    }
+
     private static Collection<Integer> parseNumbers(String numberStr) {
-        return Arrays.stream(numberStr.split("\n"))
-                .flatMap(line -> Arrays.stream(line.split(",")))
+        Pair<String, String> delimiterAndNumStr = extractDelimiterAndNumStr(numberStr);
+
+        return Arrays.stream(delimiterAndNumStr.second().split("\n"))
+                .flatMap(line -> Arrays.stream(line.split(delimiterAndNumStr.first())))
                 .map(String::trim)
                 .filter(token -> !token.isEmpty())
                 .map(Integer::parseInt)
