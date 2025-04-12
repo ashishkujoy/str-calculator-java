@@ -60,4 +60,11 @@ public class CalculatorTest {
 
         assertEquals(15, sum);
     }
+
+    @Test
+    void sumOfMultiCharCustomDelimitedNumbers() throws InvalidNumberException {
+        int sum = Calculator.add("//#-\n1#-2#-3\n4#-5");
+
+        assertEquals(15, sum);
+    }
 }
